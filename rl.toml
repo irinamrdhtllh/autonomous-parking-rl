@@ -1,0 +1,16 @@
+[Carla-v0]
+n_envs = 1
+learning_rate = "lin_7e-4"
+n_timesteps = 1e6
+batch_size = 128
+n_epochs = 10
+gamma = 0.99
+gae_lambda = 0.95
+clip_range = 0.2
+normalize_advantage = true
+ent_coef = 0.001
+vf_coef = 0.4
+max_grad_norm = 0.5
+use_sde = false
+policy = "MultiInputPolicy"
+policy_kwargs = "dict(features_extractor_class=CustomFeatureExtractor, features_extractor_kwargs=dict(features_dim=23))"

@@ -1,0 +1,63 @@
+[carla]
+host = "localhost"
+timeout = 30.0
+retries_on_error = 30
+resolution_x = 600
+resolution_y = 600
+quality_level = "Epic"
+enable_map_assets = true
+enable_rendering = true
+show_display = true
+
+[experiment]
+mode = "train"  # train or test
+town = "Town05"
+weather = "ClearNoon"
+scenario = "perpendicular"
+continuous = false
+framestack = 4
+max_time_idle = 200
+max_time_episode = 1000
+
+[experiment.hero]
+model = "vehicle.dodge.charger_2020"
+camera_normalized = false
+camera_grayscale = false
+
+[experiment.hero.spawn_point_bounds]
+top_left = 0
+top_right = 0
+bottom_left = 0
+bottom_right = 0
+
+[experiment.hero.sensors.front_cam]
+type = "sensor.camera.rgb"
+image_size = 128
+transform = "0.5,0,1.65,0,-10,0"
+
+[experiment.hero.sensors.back_cam]
+type = "sensor.camera.rgb"
+image_size = 128
+transform = "-1.5,0,1.65,0,-10,180"
+
+[experiment.hero.sensors.left_cam]
+type = "sensor.camera.rgb"
+image_size = 128
+transform = "-0.2,-0.5,1.65,0,-10,270"
+
+[experiment.hero.sensors.right_cam]
+type = "sensor.camera.rgb"
+image_size = 128
+transform = "-0.2,0.5,1.65,0,-10,90"
+
+[experiment.hero.sensors.lidar]
+type = "sensor.lidar.ray_cast_semantic"
+range = 20
+
+[experiment.hero.sensors.collision]
+type = "sensor.other.collision"
+
+[experiment.background_activity]
+n_parked_cars = 30
+parking_points = []
+n_walkers = 0
