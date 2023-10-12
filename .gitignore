@@ -1,2 +1,5 @@
 .venv
+.vscode
 __pycache__
+*.gif
+collision_history.txt
