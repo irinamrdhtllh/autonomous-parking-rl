@@ -1,6 +1,7 @@
 [carla]
 host = "localhost"
 timeout = 30.0
+timestep = 0.05
 retries_on_error = 30
 resolution_x = 600
 resolution_y = 600
@@ -17,37 +18,45 @@ scenario = "perpendicular"
 continuous = false
 framestack = 4
 max_time_idle = 200
-max_time_episode = 1000
+max_time_episode = 2000
 
 [experiment.hero]
 model = "vehicle.dodge.charger_2020"
 camera_normalized = false
 camera_grayscale = false
+max_lidar_actors = 10
+spawn_point_loc = "carla.Location(x=-38, y=-30, z=0.5)"
+spawn_point_rot = "carla.Rotation(pitch=0, yaw=315, roll=0)"
 
-[experiment.hero.spawn_point_bounds]
-top_left = 0
-top_right = 0
-bottom_left = 0
-bottom_right = 0
+[experiment.hero.goal_boundary]
+top_left = "carla.Location(x=-31.45, y=-45.19, z=0.5)"
+top_right = "carla.Location(x=-26.45, y=-45.2, z=0.5)"
+bottom_left = "carla.Location(x=-31.45, y=-42.36, z=0.5)"
+bottom_right = "carla.Location(x=-26.45, y=-42.4, z=0.5)"
+center = "carla.Location(x=-28.85, y=-43.8, z=0.5)"
 
 [experiment.hero.sensors.front_cam]
-type = "sensor.camera.rgb"
-image_size = 128
+type = "sensor.camera.semantic_segmentation"
+image_size_x = 256
+image_size_y = 256
 transform = "0.5,0,1.65,0,-10,0"
 
 [experiment.hero.sensors.back_cam]
-type = "sensor.camera.rgb"
-image_size = 128
+type = "sensor.camera.semantic_segmentation"
+image_size_x = 256
+image_size_y = 256
 transform = "-1.5,0,1.65,0,-10,180"
 
 [experiment.hero.sensors.left_cam]
-type = "sensor.camera.rgb"
-image_size = 128
+type = "sensor.camera.semantic_segmentation"
+image_size_x = 256
+image_size_y = 256
 transform = "-0.2,-0.5,1.65,0,-10,270"
 
 [experiment.hero.sensors.right_cam]
-type = "sensor.camera.rgb"
-image_size = 128
+type = "sensor.camera.semantic_segmentation"
+image_size_x = 256
+image_size_y = 256
 transform = "-0.2,0.5,1.65,0,-10,90"
 
 [experiment.hero.sensors.lidar]
@@ -58,6 +67,75 @@ range = 20
 type = "sensor.other.collision"
 
 [experiment.background_activity]
-n_parked_cars = 30
-parking_points = []
-n_walkers = 0
+n_parked_cars = [15, 30, 45]
+parking_points = [
+    # Side 1
+    "carla.Location(x=-28.85, y=-43.8, z=0.5)",
+    "carla.Location(x=-28.85, y=-40.97, z=0.5)",
+    "carla.Location(x=-28.85, y=-38.2, z=0.5)",
+    "carla.Location(x=-28.85, y=-35.41, z=0.5)",
+    "carla.Location(x=-28.85, y=-32.63, z=0.5)",
+    "carla.Location(x=-28.85, y=-29.85, z=0.5)",
+    "carla.Location(x=-28.85, y=-27.12, z=0.5)",
+    "carla.Location(x=-28.85, y=-24.39, z=0.5)",
+    "carla.Location(x=-28.85, y=-21.51, z=0.5)",
+    "carla.Location(x=-28.85, y=-18.83, z=0.5)",
+    # Side 2
+    "carla.Location(x=-22.65, y=-43.8, z=0.5)",
+    "carla.Location(x=-22.65, y=-40.97, z=0.5)",
+    "carla.Location(x=-22.65, y=-38.2, z=0.5)",
+    "carla.Location(x=-22.65, y=-35.41, z=0.5)",
+    "carla.Location(x=-22.65, y=-32.63, z=0.5)",
+    "carla.Location(x=-22.65, y=-29.85, z=0.5)",
+    "carla.Location(x=-22.65, y=-27.12, z=0.5)",
+    "carla.Location(x=-22.65, y=-24.39, z=0.5)",
+    "carla.Location(x=-22.65, y=-21.51, z=0.5)",
+    "carla.Location(x=-22.65, y=-18.83, z=0.5)",
+    # Side 3
+    "carla.Location(x=-12.85, y=-43.8, z=0.5)",
+    "carla.Location(x=-12.85, y=-40.97, z=0.5)",
+    "carla.Location(x=-12.85, y=-38.2, z=0.5)",
+    "carla.Location(x=-12.85, y=-35.41, z=0.5)",
+    "carla.Location(x=-12.85, y=-32.63, z=0.5)",
+    "carla.Location(x=-12.85, y=-29.85, z=0.5)",
+    "carla.Location(x=-12.85, y=-27.12, z=0.5)",
+    "carla.Location(x=-12.85, y=-24.39, z=0.5)",
+    "carla.Location(x=-12.85, y=-21.51, z=0.5)",
+    "carla.Location(x=-12.85, y=-18.83, z=0.5)",
+    # Side 4
+    "carla.Location(x=-6.65, y=-43.8, z=0.5)",
+    "carla.Location(x=-6.65, y=-40.97, z=0.5)",
+    "carla.Location(x=-6.65, y=-38.2, z=0.5)",
+    "carla.Location(x=-6.65, y=-35.41, z=0.5)",
+    "carla.Location(x=-6.65, y=-32.63, z=0.5)",
+    "carla.Location(x=-6.65, y=-29.85, z=0.5)",
+    "carla.Location(x=-6.65, y=-27.12, z=0.5)",
+    "carla.Location(x=-6.65, y=-24.39, z=0.5)",
+    "carla.Location(x=-6.65, y=-21.51, z=0.5)",
+    "carla.Location(x=-6.65, y=-18.83, z=0.5)",
+    # Side 2
+    "carla.Location(x=3.5, y=-43.8, z=0.5)",
+    "carla.Location(x=3.5, y=-40.97, z=0.5)",
+    "carla.Location(x=3.5, y=-38.2, z=0.5)",
+    "carla.Location(x=3.5, y=-35.41, z=0.5)",
+    "carla.Location(x=3.5, y=-32.63, z=0.5)",
+    "carla.Location(x=3.5, y=-29.85, z=0.5)",
+    "carla.Location(x=3.5, y=-27.12, z=0.5)",
+    "carla.Location(x=3.5, y=-24.39, z=0.5)",
+    "carla.Location(x=3.5, y=-21.51, z=0.5)",
+    "carla.Location(x=3.5, y=-18.83, z=0.5)",
+    # Side 6
+    "carla.Location(x=9.75, y=-43.8, z=0.5)",
+    "carla.Location(x=9.75, y=-40.97, z=0.5)",
+    "carla.Location(x=9.75, y=-38.2, z=0.5)",
+    "carla.Location(x=9.75, y=-35.41, z=0.5)",
+    "carla.Location(x=9.75, y=-32.63, z=0.5)",
+    "carla.Location(x=9.75, y=-29.85, z=0.5)",
+    "carla.Location(x=9.75, y=-27.12, z=0.5)",
+    "carla.Location(x=9.75, y=-24.39, z=0.5)",
+    "carla.Location(x=9.75, y=-21.51, z=0.5)",
+    "carla.Location(x=9.75, y=-18.83, z=0.5)",
+]
+n_walkers = [20, 40, 60]
+tm_hybrid_mode = false
+seed = true
