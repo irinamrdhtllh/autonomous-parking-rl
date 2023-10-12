@@ -1,6 +1,5 @@
-from typing import TypedDict
-
 import toml
+from typing_extensions import TypedDict
 
 CONFIG_FILE = "config.toml"
 
